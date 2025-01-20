@@ -6,7 +6,7 @@ pipeline {
                 sh 'echo build!!'
             }
         }
-        state('Test') {
+        stage('Test') {
             steps {
                 sh './gradlew check'
             }
