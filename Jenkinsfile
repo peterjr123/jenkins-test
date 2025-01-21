@@ -8,6 +8,7 @@ pipeline {
         }
         stage('Test') {
             steps {
+                sh 'chmod +x ./gradlew'
                 sh './gradlew check'
             }
         }
@@ -15,11 +16,11 @@ pipeline {
     post {
         always {
             echo 'This will always run'
-            archiveArtifacts artifacts: 'build/libs/**/*.jar', fingerprint: true
-            junit 'build/reports/**/*.xml'
         }
         success {
             echo 'This will run only if successful'
+            archiveArtifacts artifacts: 'build/libs/**/*.jar', fingerprint: true
+            junit 'build/reports/**/*.xml'
         }
         failure {
             echo 'This will run only if failed'
