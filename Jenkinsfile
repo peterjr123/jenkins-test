@@ -19,8 +19,11 @@ pipeline {
         }
         success {
             echo 'This will run only if successful'
-            archiveArtifacts artifacts: 'build/libs/**/*.jar', fingerprint: true
-            junit 'build/reports/**/*.xml'
+            junit 'build/test-results/**/*.xml'
+
+            mail to: 'jsp020206@gmail.com',
+                 subject: 'pipeline success ${currentBuild.fullDisplayName}',
+                 body: 'build url: ${env.BUILD_URL}'
         }
         failure {
             echo 'This will run only if failed'
